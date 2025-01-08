@@ -4,6 +4,7 @@
 // Question : Comment gérer proprement la fermeture des connexions ?
 // Réponse : Pour gérer proprement la fermeture des connexions, il est important d'écouter les événements de terminaison de l'application (comme 'SIGINT', 'SIGTERM', etc.) et de fermer les connexions aux bases de données dans les gestionnaires de ces événements. Cela garantit que les ressources sont libérées correctement et que les connexions ne restent pas ouvertes inutilement.
 
+
 const { MongoClient } = require('mongodb');
 const redis = require('redis');
 const config = require('./env');
@@ -11,16 +12,38 @@ const config = require('./env');
 let mongoClient, redisClient, db;
 
 async function connectMongo() {
-  // TODO: Implémenter la connexion MongoDB
+  try {
+    // Implémenter la connexion MongoDB
+    mongoClient = new MongoClient(config.mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoClient.connect();
+    db = mongoClient.db(config.mongoDbName);
+    console.log('Connected to MongoDB');
+  } catch (error) {
   // Gérer les erreurs et les retries
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1);
+  }
 }
 
 async function connectRedis() {
-  // TODO: Implémenter la connexion Redis
-  // Gérer les erreurs et les retries
+  try {
+    // Implémenter la connexion Redis
+    redisClient = redis.createClient({ url: config.redisUri });
+    redisClient.on('error', (err) => console.error('Redis Client Error', err));
+    await redisClient.connect();
+    console.log('Connected to Redis');
+  } catch (error) {
+    // Gérer les erreurs et les retries
+    console.error('Error connecting to Redis:', error);
+    process.exit(1);
+  }
 }
 
 // Export des fonctions et clients
 module.exports = {
-  // TODO: Exporter les clients et fonctions utiles
+  connectMongo,
+  connectRedis,
+  getMongoClient: () => mongoClient,
+  getRedisClient: () => redisClient,
+  getDb: () => db
 };
