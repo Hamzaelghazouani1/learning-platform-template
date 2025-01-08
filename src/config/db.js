@@ -1,7 +1,8 @@
 // Question : Pourquoi créer un module séparé pour les connexions aux bases de données ?
-// Réponse : 
+// Réponse : Créer un module séparé pour les connexions aux bases de données permet de centraliser et de réutiliser le code de connexion. Cela facilite la maintenance, améliore la lisibilité du code et permet de gérer les connexions de manière cohérente et efficace dans toute l'application.
+
 // Question : Comment gérer proprement la fermeture des connexions ?
-// Réponse : 
+// Réponse : Pour gérer proprement la fermeture des connexions, il est important d'écouter les événements de terminaison de l'application (comme 'SIGINT', 'SIGTERM', etc.) et de fermer les connexions aux bases de données dans les gestionnaires de ces événements. Cela garantit que les ressources sont libérées correctement et que les connexions ne restent pas ouvertes inutilement.
 
 const { MongoClient } = require('mongodb');
 const redis = require('redis');
