@@ -10,7 +10,7 @@ git clone https://github.com/Hamzaelghazouani1/learning-platform-nosql
 
 2. Installer les dépendances :
 ```bash
-npm install
+npm run install
 ```
 
 3. Démarrer le serveur :
