@@ -1,5 +1,5 @@
 // Question: Pourquoi créer des services séparés ?
-// Réponse: 
+// Réponse: La création de services séparés dans une architecture permet un découplage qui facilite l'évolution indépendante de chaque service, limite l'impact des pannes et offre une meilleure scalabilité en optimisant les ressources là où c'est nécessaire.
 
 const { ObjectId } = require('mongodb');
 
