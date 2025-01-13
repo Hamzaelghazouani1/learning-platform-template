@@ -8,8 +8,14 @@ const router = express.Router();
 const courseController = require('../controllers/courseController');
 
 // Routes pour les cours
-router.post('/', courseController.createCourse);
+router.get('/', courseController.getCourses);
 router.get('/:id', courseController.getCourse);
-router.get('/stats', courseController.getCourseStats);
+router.get('/stats', courseController.getCourseByStats);
+router.post('/', courseController.createCourse);
+router.post('/many', courseController.createCourses);
+router.put('/:id', courseController.updateCourse);
+router.put('/many', courseController.updateCourses);
+router.delete('/:id', courseController.deleteCourse);
+router.delete('/many', courseController.deleteCourses);
 
 module.exports = router;
