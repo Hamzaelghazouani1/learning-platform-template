@@ -35,9 +35,6 @@ src/
 - **MongoDB**: Pour la gestion des données
 - **dotenv**: Pour la gestion des variables d'environnement
 
-### Architecture
-
-- **Architecture en couches**: Séparation claire entre routes, contrôleurs et services
 
 ## Questions : 
 
@@ -115,6 +112,39 @@ Réponse: Pour organiser le point d'entrée de l'application, il est recommandé
 
 Réponse: La meilleure façon de gérer le démarrage de l'application est de décomposer les différentes étapes en fonctions modulaires et de les appeler séquentiellement dans le fichier principal (app.js). Cela permet de rendre le code plus lisible, plus modulaire et plus facile à maintenir. Il est également important de gérer les erreurs de manière appropriée et de suivre les meilleures pratiques de gestion des connexions aux bases de données.
 
-### Base de Données
-- **MongoDB**: Pour la flexibilité du schéma et la scalabilité
-- **Mongoose**: Pour la modélisation des données et la validation
+
+# Les Outils Utiliser:
+
+MongoDb : Pour ce projet, nous utilisons MongoDB comme base de données principale.
+
+![MongoDB](img/mongoDB-compose.png)
+
+## Redis
+
+Pour ce projet, nous utilisons également Redis pour la gestion du cache.
+
+Pour interagir avec Redis en ligne de commande, vous pouvez utiliser `redis-cli`. Voici quelques commandes de base :
+
+1. Connexion à Redis :
+
+```bash
+redis-cli
+```
+
+![Redis](img/redi-cli.png)
+
+## Postman
+
+Postman est un outil utile pour tester les API. Voici comment vous pouvez l'utiliser pour tester cette API.
+
+![Postman](img/api-test-postman.png)
+---
+
+### Exemples de Requêtes
+
+Voici quelques exemples de requêtes que vous pouvez tester avec Postman :
+
+- **GET** `/api/courses` : Récupérer la liste des cours.
+- **POST** `/api/courses` : Ajouter un nouveau cours (nécessite un corps de requête JSON).
+- **PUT** `/api/courses/:id` : Mettre à jour un cours existant (nécessite un corps de requête JSON).
+- **DELETE** `/api/courses/:id` : Supprimer un cours.
