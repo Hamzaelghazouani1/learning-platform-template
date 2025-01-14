@@ -43,16 +43,22 @@ async function deleteCourses(req, res) {
 
 async function getCourse(req, res) {
     const cacheKey = `${CACHE_PREFIX}:${req.params.id}`;
-    const cachedCourse = await redisService.getData(cacheKey);
-    if (cachedCourse) return cachedCourse;
+    const cache = await redisService.getData(cacheKey);
+    if (cache){
+        res.status(200).json(cache);
+        return;
+    }
     const course = await mongoService.findOneById('courses', req.params.id);
     await redisService.cacheData(cacheKey, course, CACHE_TTL);
     res.status(200).json(course);
 }
 
 async function getCourses(req, res) {
-    const cachedCourses = await redisService.getData(`${CACHE_PREFIX}:all`);
-    if (cachedCourses) return cachedCourses;
+    const cache = await redisService.getData(`${CACHE_PREFIX}:all`);
+    if (cache){
+        res.status(200).json(cache);
+        return;
+    }
     const courses = await mongoService.find('courses',{});
     await redisService.cacheData(`${CACHE_PREFIX}:all`, courses, CACHE_TTL);
     res.status(200).json(courses);
@@ -60,8 +66,11 @@ async function getCourses(req, res) {
 
 async function getCourseByStats(req, res) {
     const cacheKey = `${CACHE_PREFIX}:stats:${req.body.stats}`;
-    const cachedCourses = await redisService.getData(cacheKey);
-    if (cachedCourses) return cachedCourses;
+    const cache = await redisService.getData(cacheKey);
+    if (cache){
+        res.status(200).json(cache);
+        return;
+    }
     const courses = await mongoService.find('courses',{ stats: { $eq: req.body.stats} });
     await redisService.cacheData(cacheKey, courses, CACHE_TTL);
     res.status(200).json(courses);
